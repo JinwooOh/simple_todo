@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import SingleTodo from './singleTodo';
 
 class App extends Component {
   constructor(){
@@ -23,12 +23,19 @@ class App extends Component {
       currentInput: ""
     });
     console.log(this.state.todoList);
-
   }
+  deleteTodo = (i)=>{
+    let todoListCopy = this.state.todoList.slice();
+    todoListCopy.splice(i,1);
+    this.setState({
+      todoList: todoListCopy
+    })
+  }
+
   render(){
     let bulletList = this.state.todoList.map((e, i)=>{
       return (
-        <li key={i}>{e}</li>
+        <SingleTodo todo = {e} delete= {()=>this.deleteTodo(i)}/>
       );
     });
     return(
